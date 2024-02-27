@@ -46,9 +46,9 @@ function Home() {
           <p className='text-lg text-[#C9ADA7]'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit a, optio maiores inventore voluptate consequuntur sapiente, atque quis vitae rem magnam deleniti.</p>
         </div>
 
-        <ImageContainer/>
-        <ImageContainer/>
-        <ImageContainer/>
+        <ImageContainer imageOrder="order-none"/>
+        <ImageContainer imageOrder="order-last"/>
+        <ImageContainer imageOrder="order-none"/>
 
       </div>
     </div >
