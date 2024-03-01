@@ -8,7 +8,7 @@ function Home() {
   
   return (
     <div className="relative">
-      <div className='absolute top-5 left-64 p-4 text-[#C9ADA7] m-2'>
+      <div className='absolute scroll-smooth top-5 left-64 p-4 text-[#C9ADA7] m-2'>
 
 
         <TitleIntro MegaTitle="INTRO" subtitle="Web Design and development" para="We love crafting websites that not only look amazing but also work seamlessly. Let's team up to make your online vision a reality!" />
