@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SlClose } from "react-icons/sl";
 import { AnimatePresence, motion } from 'framer-motion';
-import Hamburger from 'hamburger-react'
+import { Slant as Hamburger } from 'hamburger-react'
 
 const navData = [
     { title: "{ Home }", path: '/' },
@@ -87,14 +87,14 @@ function Navbar() {
         <div className='fixed top-0 left-0 w-full h-[100vh] flex flex-row'>
 
             <div className={`fixed right-20 z-60 top-5 text-4xl $ text-[#F2E9E4] cursor-pointer`} >
-                <Hamburger onToggle={toggleNavbar} size={40} />
+                <Hamburger toggled={open} toggle={setOpen} size={40} />
             </div>
 
             <AnimatePresence>
                 {open && (
                     <>
                         <motion.div
-                            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 overflow-hidden"
+                            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60"
                             onClick={toggleNavbar}
                         />
                         <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className={`w-[100vw] h-[100vh] origin-top-right overflow-hidden z-50 ${open ? "bg-[#C9ADA7]" : ""}`} style={{ borderRadius: "50%" }}>
@@ -108,7 +108,7 @@ function Navbar() {
                                     className={`text-6xl`}>
                                     {navData.map((nav, index) => (
                                         <div key={index} className="overflow-hidden">
-                                            <NavRender uniqueKey={index} title={nav.title} href={nav.path} />
+                                            <NavRender uniqueKey={index} title={nav.title} href={nav.path} toggleNavbar={toggleNavbar}/>
                                         </div>
                                     ))}
                                 </div>
@@ -154,12 +154,9 @@ const navLink = {
 
 
 
-const NavRender = ({ uniqueKey, title, href }) => {
-    const handleClick = (e) => {
-        toggleNavbar();
-        setTimeout(() => {
-            window.location.href = href; 
-        }, 500);
+const NavRender = ({ uniqueKey, title, href,toggleNavbar }) => {
+    const handleClick = () => {
+        toggleNavbar()
     };
 
     return (
