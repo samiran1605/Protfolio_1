@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SlClose } from "react-icons/sl";
 import { AnimatePresence, motion } from 'framer-motion';
@@ -16,15 +16,24 @@ function Navbar() {
 
     const [open, setOpen] = useState(false);
 
-    const toggleNavbar = () => {
+    useEffect(()=>{
         const body = document.querySelector('body');
-        if (!open) {
-            body.classList.add('overflow-hidden');
+
+        if (open) {
+            body.classList.add('overflow-hidden', 'min-h-screen');
         } else {
-            body.classList.remove('overflow-hidden');
+            body.classList.remove('overflow-hidden', 'min-h-screen');
         }
+
+        return () => {
+            body.classList.remove('overflow-hidden', 'min-h-screen');
+        };
+    },[open])
+
+    const toggleNavbar = () => {
         setOpen((prevOpen) => !prevOpen)
     }
+
 
     const menuVars = {
         initial: {
