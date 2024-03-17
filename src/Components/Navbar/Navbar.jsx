@@ -39,18 +39,18 @@ function Navbar() {
         initial: {
             scaleY: 0,
             scaleX: 0,
-
-            borderLeftRadius: "100%",
-            borderBottomLeftRadius: "100%",
             opacity: 0,
+
+            borderLeftRadius: "50%",
+            borderBottomLeftRadius: "50%",
         },
         animate: {
             scaleY: [0, 1],
             scaleX: [0, 1],
-
-            borderLeftRadius: ["100%", "100%", "100%", "50%"],
-            borderBottomLeftRadius: ["100%", "100%", "100%", "50%"],
             opacity: 1,
+
+            borderLeftRadius: ["100%", "100%", "100%", "1%"],
+            borderBottomLeftRadius: ["100%", "100%", "100%", "1%"],
             transition: {
                 duration: 0.5,
                 ease: [0.12, 0, 0.39, 0],
@@ -60,13 +60,13 @@ function Navbar() {
         exit: {
             scaleY: 0,
             scaleX: 0,
-
-            borderLeftRadius: "100%",
-            borderBottomLeftRadius: "100%",
+            opacity:0,
+            borderLeftRadius: "50%",
+            borderBottomLeftRadius: "50%",
             transition: {
                 delay: 0.3,
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.9,
+                ease: [0.22, 1, 0.40, 1],
             },
         }
 
@@ -93,9 +93,10 @@ function Navbar() {
     }
 
     return (
-        <div className='fixed top-0 left-0 w-full h-[100vh] flex flex-row'>
 
-            <div className={`fixed right-20 z-60 top-5 text-4xl $ text-[#F2E9E4] cursor-pointer`} >
+        <div className='fixed top-0 left-0 flex flex-row'>
+
+            <div className={`fixed right-20 z-60 top-5 text-4xl $ text-[#F2E9E4] cursor-pointer`} style={{ zIndex: 60 }}>
                 <Hamburger toggled={open} toggle={setOpen} size={40} />
             </div>
 
@@ -106,9 +107,9 @@ function Navbar() {
                             className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60"
                             onClick={toggleNavbar}
                         />
-                        <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className={`w-[100vw] h-[100vh] origin-top-right overflow-hidden z-50 ${open ? "bg-[#C9ADA7]" : ""}`} style={{ borderRadius: "50%" }}>
+                        <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className={`w-[100vw] h-[100vh] origin-[94%_5%] overflow-hidden z-20 ${open ? "bg-[#C9ADA7]" : ""}`} style={{ borderRadius: "1%" }}>
 
-                            <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className='bg-[#101010] w-[100vw] h-[100vh] origin-top-right flex items-center overflow-hidden justify-center text-center' style={{ borderRadius: "50%" }}>
+                            <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className='bg-[#101010] w-[100vw] h-[100vh] origin-top-right flex items-center overflow-hidden justify-center text-center border-2 border-[#C9ADA7]' style={{ borderRadius: "1%" }}>
 
                                 <div
                                     variants={containerVars}
@@ -116,7 +117,7 @@ function Navbar() {
                                     animate="open"
                                     className={`text-6xl`}>
                                     {navData.map((nav, index) => (
-                                        <div key={index} className="overflow-hidden">
+                                        <div key={index} className="overflow-hidden ">
                                             <NavRender uniqueKey={index} title={nav.title} href={nav.path} toggleNavbar={toggleNavbar}/>
                                         </div>
                                     ))}

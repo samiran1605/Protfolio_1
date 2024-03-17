@@ -10,6 +10,19 @@ const titles = [
   { MegaTitle: "TIME", subtitle: "We value your time as much you do!", para: "We love crafting websites that not only look amazing but also work seamlessly. Let's team up to make your online vision a reality!" }
 ];
 
+const imageData = [
+  {
+    imageOrder:"order-none",imageUrl:"https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    imageOrder:"order-last", imageUrl:"https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    imageOrder:"order-none", imageUrl:"https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  }
+
+]
+
 
 function Home() {
 
@@ -21,17 +34,16 @@ function Home() {
           <TitleIntro key={index} MegaTitle={title.MegaTitle} subtitle={title.subtitle} para={title.para} />
         ))}
 
-        <TitleIntro MegaTitle="INTRO" subtitle="Web Design and development" para="We love crafting websites that not only look amazing but also work seamlessly. Let's team up to make your online vision a reality!" />
-
-
-        <div className="mt-24 mb-24">
-          <h2 className='text-4xl text-[#F2E9E4] mb-4'>Development</h2>
-          <p className='text-lg text-[#C9ADA7]'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit a, optio maiores inventore voluptate consequuntur sapiente, atque quis vitae rem magnam deleniti.</p>
+        <div className="border-2 m-8">
+          <h1 className='text-9xl text-[#F2E9E4] w-max p-8'>Work</h1>
         </div>
 
-        <ImageContainer imageOrder="order-none" imageUrl="https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-        <ImageContainer imageOrder="order-last" imageUrl="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-        <ImageContainer imageOrder="order-none" imageUrl="https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+
+        {imageData.map((data, index) => (
+          <ImageContainer key={index} imageOrder={data.imageOrder} imageUrl={data.imageUrl} />
+        ))}
+
+        
 
         <div className="text-center mb-24">
           <Button linkto="contact" />
