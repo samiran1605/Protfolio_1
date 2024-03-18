@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion';
 
 const imageData = [
   {
@@ -39,9 +40,9 @@ const paraData = [
 
 function ImageContainer({ }) {
 
-  const [hoverImg, setHoverImg] = useState(false);
-
   const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const containerRef = useRef(null)
 
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
@@ -51,31 +52,43 @@ function ImageContainer({ }) {
     setHoveredIndex(null);
   };
 
+  useEffect(() => {
+    const handleMouseEnterContainer = () => {
+      if (hoveredIndex !== null) {
+        setHoveredIndex(null);
+      }
+    };
 
+    containerRef.current.addEventListener('mouseenter', handleMouseEnterContainer);
+
+    return () => {
+      containerRef.current.removeEventListener('mouseenter', handleMouseEnterContainer);
+    };
+  }, [hoveredIndex]);
 
   return (
     <>
-      <div className="flex flex-row gap-8 p-8 ">
-        <div className="flex flex-col items-start border-2 p-16">
-          <h2 className='text-4xl text-[#F2E9E4] py-2'>Development</h2>
+      <div ref={containerRef} className="flex flex-row justify-between p-8 w-10/12 ">
+        <div className="flex flex-col h-[640px] items-start justify-evenly border-2 border-dashed p-16">
           {paraData.map((para, index) => (
             <div
               key={index}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
-              className=" cursor-pointer">
+              className="m-8 text-2xl cursor-pointer ">
               <p>{para.content}</p>
             </div>
           ))}
         </div>
 
-        <div className="">
+        <motion.div className="flex items-center" animate={{ opacity: hoveredIndex !== null ? 1 : 0 }} transition={{ duration: 0.5 }}>
           {hoveredIndex !== null && (
             <>
-              <img className={`rounded object-contain h-[50vh] w-[40vw] transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0 hover:scale-105 `} src={imageData[hoveredIndex].imageUrl} alt='dev image' />
+              <img className="rounded object-contain w-96 border-2 border-dashed p-4 "
+                src={imageData[hoveredIndex].imageUrl} alt='dev image' />
             </>
           )}
-        </div>
+        </motion.div>
 
 
       </div>

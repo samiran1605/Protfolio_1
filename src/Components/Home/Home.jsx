@@ -3,6 +3,7 @@ import ImageContainer from './ImageContainer'
 import TitleIntro from './TitleIntro'
 import Button from '../Button/Button'
 import { TypeAnimation } from 'react-type-animation';
+import VideoContainer from './VideoContainer';
 
 
 const titles = [
@@ -66,9 +67,21 @@ function Home() {
           <h1 className='text-9xl text-[#4A4E69] w-max p-8'>Work</h1>
         </div>
 
-        <div className="border-2 m-8">
+        <div className="">
+          <div className="border-2  m-8">
           <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
+          </div>
+          <div className="flex flex-col justify-center items-center">
           <ImageContainer />
+          </div>
+        </div>
+        <div className="">
+          <div className="border-2  m-8">
+          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Video Editing</h1>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+          <VideoContainer/>
+          </div>
         </div>
 
 
