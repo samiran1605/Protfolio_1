@@ -96,7 +96,7 @@ function Navbar() {
 
         <div className='fixed top-0 left-0 flex flex-row'>
 
-            <div className={`fixed right-20 z-60 top-5 text-4xl $ text-[#F2E9E4] cursor-pointer`} style={{ zIndex: 60 }}>
+            <div className={`fixed z-60 top-5 right-20 text-4xl $ text-[#F2E9E4] cursor-pointer`} style={{ zIndex: 60 }}>
                 <Hamburger toggled={open} toggle={setOpen} size={40} />
             </div>
 
