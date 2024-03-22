@@ -4,6 +4,10 @@ import ReactPlayer from 'react-player'
 
 const paraData = [
     {
+        content: "Jaggery making",
+
+    },
+    {
         content: "StudioVity Intro",
 
     },
@@ -23,6 +27,9 @@ const paraData = [
 ]
 
 const videoUrls = [
+    {
+        Urls: "https://youtu.be/qBCUefeLY4k"
+    },
     {
         Urls: "https://youtu.be/r06D_DYPXpI"
     },
@@ -94,7 +101,7 @@ function VideoContainer() {
                 <motion.div className="flex items-center" animate={{ opacity: hoveredIndex !== null ? 1 : 0 }} transition={{ duration: 0.5 }}>
                     {hoveredIndex !== null && (
                         <>
-                            <ReactPlayer url={videoUrls[hoveredIndex].Urls} playing={true} width="120%" height="50%" volume={0.25} />
+                            <ReactPlayer url={videoUrls[hoveredIndex].Urls} playing={true} width="640px" height="360px" volume={0.5} />
                         </>
                     )}
                 </motion.div>

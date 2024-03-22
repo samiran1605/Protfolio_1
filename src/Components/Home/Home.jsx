@@ -6,15 +6,6 @@ import { TypeAnimation } from 'react-type-animation';
 import VideoContainer from './VideoContainer';
 
 
-const titles = [
-  { MegaTitle: "INTRO", subtitle: "Web Design and development", para: "love crafting websites that not only look amazing but also work seamlessly. Let's team up to make your online vision a reality!" },
-  { MegaTitle: "DESIGN", subtitle: "Specially tailored to your brand", para: "Crafting designs that uniquely reflect your brand's essence, tailored to resonate with your audience." },
-  { MegaTitle: "TIME", subtitle: "We value your time as much you do!", para: "Respecting your time is at the core of our service, ensuring every moment is spent on delivering excellence for you." }
-];
-
-
-
-
 
 function Home() {
 
@@ -32,8 +23,8 @@ function Home() {
   ];
 
   return (
-    <div className="relative -z-20">
-      <h1 className='gap-3 text-[#C9ADA7] inline-block'>
+    <div className="p-4">
+      <h1 className='gap-3 text-[#C9ADA7]'>
 
         {showAnimation && (
           <TypeAnimation
@@ -57,30 +48,30 @@ function Home() {
 
       </h1>
 
-      <div className='absolute scroll-smooth top-5 p-4 text-[#C9ADA7] m-2'>
+      <div className='top-5 text-[#C9ADA7]'>
 
-        {titles.map((title, index) => (
-          <TitleIntro key={index} MegaTitle={title.MegaTitle} subtitle={title.subtitle} para={title.para} />
-        ))}
+        <div className="">
+          <TitleIntro />
+        </div>
 
-        <div className="border-2 m-8">
+        <div className="border-2 mb-2">
           <h1 className='text-9xl text-[#4A4E69] w-max p-8'>Work</h1>
         </div>
 
         <div className="">
-          <div className="border-2  m-8">
-          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
+          <div className="border-2">
+            <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
           </div>
           <div className="flex flex-col justify-center items-center">
-          <ImageContainer />
+            <ImageContainer />
           </div>
         </div>
         <div className="">
-          <div className="border-2  m-8">
-          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Video Editing</h1>
+          <div className="border-2">
+            <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Video Editing</h1>
           </div>
           <div className="flex flex-col justify-center items-center">
-          <VideoContainer/>
+            <VideoContainer />
           </div>
         </div>
 
