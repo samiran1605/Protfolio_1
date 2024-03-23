@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, useTransform, useScroll, useSpring, AnimatePresence } from "framer-motion"
 import { FaRegWindowClose } from "react-icons/fa";
 import { FaRegWindowRestore } from "react-icons/fa";
@@ -14,83 +14,68 @@ const titles = [
 
 
 
-function TitleIntro() {
+function TitleIntro({ getOffsetTop }) {
 
     const scrollRef = useRef(null)
-    const ghostRef = useRef(null)
-    const [scrollRange, setScrollRange] = useState(0)
-    const [viewportW, setViewportW] = useState(0)
+    const offsetTop = getOffsetTop();
 
-    // if(scrollRef.current){
-    //     console.log(scrollRef.current.scrollWidth)
-    // }
 
-    // if(ghostRef.current){
-    //     console.log(ghostRef.current)
-    // }
-
-    // console.log(-scrollRange + viewportW)
-
-    useLayoutEffect(() => {
-        scrollRef && setScrollRange(scrollRef.current.scrollWidth)
-    }, [scrollRef])
-
-    const onResize = useCallback(entries => {
-        for (let entry of entries) {
-            setViewportW(entry.contentRect.width)
-            console.log(entry.target)
+    useEffect(() => {
+        const handleScroll = () => {
+            let percentage =  ((window.scrollY - offsetTop)/ window.innerHeight)*100;
+            percentage = percentage < 0 ? 0 : percentage > 200 ? 200 : percentage;
+            if (scrollRef.current) {
+                scrollRef.current.style.transform = `translate3d(${-percentage}vw, 0, 0)`;
+            }
         }
-        
-    }, [])
 
-    useLayoutEffect(() => {
-        const resizeObserver = new ResizeObserver(entries => onResize(entries))
-        resizeObserver.observe(ghostRef.current)
-        return () => resizeObserver.disconnect()
-    }, [onResize])
+        window.addEventListener('scroll', handleScroll);
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    }
+    })
 
-    const { scrollYProgress } = useScroll()
-    const transform = useTransform(
-        scrollYProgress,
-        [0, 1],
-        [0, -scrollRange*1.47]
-    )
-    const physics = { damping: 15, mass: 0.27, stiffness: 55 }
-    const spring = useSpring(transform, physics)
-    // console.log(spring)
+    
+
 
     return (
         <>
-            <div className="fixed left-0 right-0 top-0 bottom-0 will-change-transform overflow-hidden -z-10">
-                <motion.div ref={scrollRef} style={{x: spring}} className='relative gap-4 h-[100vh] w-max flex  items-center px-8'>
-                    {titles.map((title, index) => (
-                        <div key={index} className='relative'>
-                            <div className="p-2 rounded border-2 flex items-center justify-end gap-3">
-                                <div className="flex items-center justify-center transition ease-in-out delay-150 hover:scale-110 duration-200 hover:opacity-60">
-                                    <VscChromeMinimize size={24} color='#F2E9E4' />
+            <div className="w-full h-full">
+                <div style={{}} className='gap-4 h-[300vh]'>
+                    <div className="sticky top-0 h-[100vh] overflow-hidden">
+                        <div ref={scrollRef} className="absolute top-0 h-full w-[300vw] will-change-transform flex justify-between items-center p-[5vw]">
+                            {titles.map((title, index) => (
+                                <div key={index} className='relative w-[80vw] overflow-hidden'>
+                                    <div className="p-4 rounded border-2 flex items-center justify-end gap-3">
+                                        <div className="flex items-center justify-center transition ease-in-out delay-150 hover:scale-110 duration-200 hover:opacity-60">
+                                            <VscChromeMinimize size={24} color='#F2E9E4' />
+                                        </div>
+                                        <div className="flex items-center justify-center transition ease-in-out delay-150 hover:scale-110 duration-200 hover:opacity-40">
+                                            <FaRegWindowRestore size={16} color='#F2E9E4' />
+                                        </div>
+                                        <div className="flex items-center justify-center transition ease-in-out delay-150 hover:scale-110 duration-200 hover:opacity-60">
+                                            <FaRegWindowClose size={24} color='#F2E9E4' />
+                                        </div>
+                                    </div>
+                                    <div className="border-2 divide-y">
+                                        <div className="relative">
+                                            <h1 className='text-[#4A4E69] text-9xl text-center'>{title.MegaTitle}</h1>
+                                            <h2 className='text-center text-5xl text-[#F2E9E4] absolute py-3 bottom-0 inset-x-0'>
+                                                {title.subtitle}</h2>
+                                        </div>
+                                        <p className='text-center text-lg text-[#C9ADA7] p-8 h-[20vh]'>{title.para}</p>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-center transition ease-in-out delay-150 hover:scale-110 duration-200 hover:opacity-40">
-                                    <FaRegWindowRestore size={16} color='#F2E9E4' />
-                                </div>
-                                <div className="flex items-center justify-center transition ease-in-out delay-150 hover:scale-110 duration-200 hover:opacity-60">
-                                    <FaRegWindowClose size={24} color='#F2E9E4' />
-                                </div>
-                            </div>
-                            <div className="border-2 divide-y">
-                                <div className="relative">
-                                    <h1 className='text-[#4A4E69] text-9xl text-center'>{title.MegaTitle}</h1>
-                                    <h2 className='text-center text-5xl text-[#F2E9E4] absolute py-3 bottom-0 inset-x-0'>
-                                        {title.subtitle}</h2>
-                                </div>
-                                <p className='text-center text-lg text-[#C9ADA7] p-16'>{title.para}</p>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </motion.div>
+                    </div>
+                </div>
             </div>
-            <div ref={ghostRef} style={{ height: scrollRange }} className="w-[50vh]" />
+
         </>
     )
 }
 
 export default TitleIntro
+
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ImageContainer from './ImageContainer'
 import TitleIntro from './TitleIntro'
 import Button from '../Button/Button'
@@ -8,6 +8,17 @@ import VideoContainer from './VideoContainer';
 
 
 function Home() {
+
+  const [offsetTop, setOffsetTop] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setOffsetTop(document.querySelector('.TopOffSet').getBoundingClientRect().top + window.scrollY);
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  })
 
   const [showAnimation, setShowAnimation] = useState(true);
 
@@ -23,7 +34,7 @@ function Home() {
   ];
 
   return (
-    <div className="p-4">
+    <div className="p-4 TopOffSet">
       <h1 className='gap-3 text-[#C9ADA7]'>
 
         {showAnimation && (
@@ -51,7 +62,7 @@ function Home() {
       <div className='top-5 text-[#C9ADA7]'>
 
         <div className="">
-          <TitleIntro />
+          <TitleIntro getOffsetTop={()=> offsetTop} />
         </div>
 
         <div className="border-2 mb-2">
@@ -63,7 +74,7 @@ function Home() {
             <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
           </div>
           <div className="flex flex-col justify-center items-center">
-            <ImageContainer />
+            <ImageContainer  />
           </div>
         </div>
         <div className="">
