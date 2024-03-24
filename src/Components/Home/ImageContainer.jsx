@@ -54,30 +54,30 @@ function ImageContainer({ }) {
 
   useEffect(() => {
     const handleMouseEnterContainer = () => {
-        if (containerRef.current) { // Check if containerRef.current exists
-            if (hoveredIndex !== null) {
-                setHoveredIndex(null);
-            }
+      if (containerRef.current) { // Check if containerRef.current exists
+        if (hoveredIndex !== null) {
+          setHoveredIndex(null);
         }
+      }
     };
 
     const currentContainerRef = containerRef.current;
 
     if (currentContainerRef) { // Check if currentContainerRef exists
-        currentContainerRef.addEventListener('mouseenter', handleMouseEnterContainer);
+      currentContainerRef.addEventListener('mouseenter', handleMouseEnterContainer);
     }
 
     return () => {
-        if (currentContainerRef) { // Check if currentContainerRef exists before cleanup
-            currentContainerRef.removeEventListener('mouseenter', handleMouseEnterContainer);
-        }
+      if (currentContainerRef) { // Check if currentContainerRef exists before cleanup
+        currentContainerRef.removeEventListener('mouseenter', handleMouseEnterContainer);
+      }
     };
-}, [hoveredIndex]);
+  }, [hoveredIndex]);
 
   return (
     <>
-      <div ref={containerRef} className="flex flex-row justify-between p-8 w-10/12 ">
-        <div className="flex flex-col h-[640px] items-start justify-evenly border-dashed p-4">
+      <div ref={containerRef} className=" relative flex flex-row justify-between p-8 w-10/12 h-[100vh]">
+        <div className="flex flex-col h-auto items-start justify-evenly border-dashed p-4 ">
           {paraData.map((para, index) => (
             <div
               key={index}
@@ -89,12 +89,15 @@ function ImageContainer({ }) {
           ))}
         </div>
 
-        <motion.div className="static" animate={{ opacity: hoveredIndex !== null ? 1 : 0 }} transition={{ duration: 0.5 }}>
+        <motion.div className="absolute top-0 right-0 h-[100%] w-[50%] -z-10" animate={{ opacity: hoveredIndex !== null ? 1 : 0 }} transition={{ duration: 0.5 }}>
           {hoveredIndex !== null && (
-            <>
-              <img className="absolute top-25 right-20 rounded w-2/6 border-2 border-dashed z-20"
-                src={imageData[hoveredIndex].imageUrl} alt='dev image' />
-            </>
+
+            <img className="absolute rounded w-4/5 z-20"
+              src={imageData[hoveredIndex].imageUrl} alt='dev image' style={{
+                top: `${Math.random() * 35}%`, // Random value for top
+                left: `${Math.random() * 35}%`, // Random value for left
+              }} />
+
           )}
         </motion.div>
 

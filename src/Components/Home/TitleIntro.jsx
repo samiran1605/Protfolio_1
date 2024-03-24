@@ -1,10 +1,8 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { motion, useTransform, useScroll, useSpring, AnimatePresence } from "framer-motion"
+import React, { useEffect, useRef } from 'react'
+
 import { FaRegWindowClose } from "react-icons/fa";
 import { FaRegWindowRestore } from "react-icons/fa";
 import { VscChromeMinimize } from "react-icons/vsc";
-import ResizeObserver from 'resize-observer-polyfill';
-
 
 const titles = [
     { MegaTitle: "INTRO", subtitle: "Web Design and development", para: "love crafting websites that not only look amazing but also work seamlessly. Let's team up to make your online vision a reality!" },
@@ -12,14 +10,10 @@ const titles = [
     { MegaTitle: "TIME", subtitle: "We value your time as much you do!", para: "Respecting your time is at the core of our service, ensuring every moment is spent on delivering excellence for you." }
 ];
 
-
-
 function TitleIntro({ getOffsetTop }) {
 
     const scrollRef = useRef(null)
     const offsetTop = getOffsetTop();
-
-
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,12 +30,9 @@ function TitleIntro({ getOffsetTop }) {
         }
     }, [offsetTop, scrollRef])
 
-
-
-
     return (
         <>
-            <div className="w-full h-full">
+            <div className="w-full h-full border-2">
                 <div style={{}} className='gap-4 h-[300vh]'>
                     <div className="sticky top-0 h-[100vh] overflow-hidden">
                         <div ref={scrollRef} className="absolute top-0 h-[100%] w-[300vw] will-change-transform flex justify-between items-center px-[10vw]">
@@ -59,12 +50,12 @@ function TitleIntro({ getOffsetTop }) {
                                         </div>
                                     </div>
                                     <div className="border-2 divide-y">
-                                        <div className="relative">
-                                            <h1 className='text-[#4A4E69] text-9xl text-center'>{title.MegaTitle}</h1>
-                                            <h2 className='text-center text-5xl text-[#F2E9E4] absolute py-3 bottom-0 inset-x-0'>
+                                        <div className="relative h-20 md:h-auto lg:h-auto">
+                                            <h1 className='text-[#4A4E69] text-5xl lg:text-9xl text-center'>{title.MegaTitle}</h1>
+                                            <h2 className='text-center text-xl lg:text-5xl text-[#F2E9E4] absolute py-3 bottom-0 inset-x-0'>
                                                 {title.subtitle}</h2>
                                         </div>
-                                        <p className='text-center text-lg text-[#C9ADA7] p-8 h-[20vh]'>{title.para}</p>
+                                        <p className='text-center lg:text-lg text-[#C9ADA7] p-8 h-[20vh] lg:h-[20vh]'>{title.para}</p>
                                     </div>
                                 </div>
                             ))}
@@ -78,5 +69,3 @@ function TitleIntro({ getOffsetTop }) {
 }
 
 export default TitleIntro
-
-
