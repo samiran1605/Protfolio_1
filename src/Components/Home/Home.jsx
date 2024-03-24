@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ImageContainer from './ImageContainer'
 import TitleIntro from './TitleIntro'
 import Button from '../Button/Button'
@@ -10,15 +10,15 @@ import VideoContainer from './VideoContainer';
 function Home() {
 
   const [offsetTop, setOffsetTop] = useState(0)
+  const offsetRef = useRef(null)
+
+
 
   useEffect(() => {
-    const handleResize = () => {
-      setOffsetTop(document.querySelector('.TopOffSet').getBoundingClientRect().top + window.scrollY);
+    if (offsetRef.current) {
+      setOffsetTop(offsetRef.current.parentElement.offsetTop)
     }
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  })
+  }, [offsetRef.current])
 
   const [showAnimation, setShowAnimation] = useState(true);
 
@@ -34,9 +34,9 @@ function Home() {
   ];
 
   return (
-    <div className="p-4 TopOffSet">
-      <h1 className='gap-3 text-[#C9ADA7]'>
+    <div className="scroll-smooth">
 
+      <h1 className='gap-3 text-[#C9ADA7] p-8'>
         {showAnimation && (
           <TypeAnimation
             sequence={animationSequence}
@@ -45,10 +45,9 @@ function Home() {
             style={{
               fontSize: '6em',
               display: 'inline-block',
-              position: 'absolute',
               top: '5px', // Adjust this value as needed
               left: '20px', // Adjust this value as needed
-              zIndex: '-1', // Set a lower z-index to keep it behind other content
+              // Set a lower z-index to keep it behind other content
               opacity: '0.3', // Adjust the opacity as needed
               pointerEvents: 'none',
             }}
@@ -56,38 +55,30 @@ function Home() {
             erase={true}
           />
         )}
-
       </h1>
 
-      <div className='top-5 text-[#C9ADA7]'>
-
-        <div className="">
-          <TitleIntro getOffsetTop={()=> offsetTop} />
+      <div className='text-[#C9ADA7] TopOffSet'>
+        <div ref={offsetRef} className="title">
+          <TitleIntro getOffsetTop={() => offsetTop} />
         </div>
 
-        <div className="border-2 mb-2">
+        <div className="border-2 mb-2 mx-8">
           <h1 className='text-9xl text-[#4A4E69] w-max p-8'>Work</h1>
         </div>
 
-        <div className="">
-          <div className="border-2">
-            <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <ImageContainer  />
-          </div>
+        <div className="border-2 mx-8">
+          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
         </div>
-        <div className="">
-          <div className="border-2">
-            <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Video Editing</h1>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <VideoContainer />
-          </div>
+        <div className="flex flex-col justify-center items-center">
+          <ImageContainer />
         </div>
 
-
-
+        <div className="border-2 mx-8">
+          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Video Editing</h1>
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <VideoContainer />
+        </div>
 
         <div className="text-center mb-8">
           <Button linkto="contact" />

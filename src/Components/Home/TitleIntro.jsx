@@ -20,22 +20,23 @@ function TitleIntro({ getOffsetTop }) {
     const offsetTop = getOffsetTop();
 
 
+
     useEffect(() => {
         const handleScroll = () => {
-            let percentage =  ((window.scrollY - offsetTop)/ window.innerHeight)*100;
+            let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
             percentage = percentage < 0 ? 0 : percentage > 200 ? 200 : percentage;
-            if (scrollRef.current) {
+            if (scrollRef.current && window.scrollY >= scrollRef.current.offsetTop) {
                 scrollRef.current.style.transform = `translate3d(${-percentage}vw, 0, 0)`;
             }
         }
 
         window.addEventListener('scroll', handleScroll);
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    }
-    })
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, [offsetTop, scrollRef])
 
-    
+
 
 
     return (
@@ -43,7 +44,7 @@ function TitleIntro({ getOffsetTop }) {
             <div className="w-full h-full">
                 <div style={{}} className='gap-4 h-[300vh]'>
                     <div className="sticky top-0 h-[100vh] overflow-hidden">
-                        <div ref={scrollRef} className="absolute top-0 h-full w-[300vw] will-change-transform flex justify-between items-center p-[5vw]">
+                        <div ref={scrollRef} className="absolute top-0 h-[100%] w-[300vw] will-change-transform flex justify-between items-center px-[10vw]">
                             {titles.map((title, index) => (
                                 <div key={index} className='relative w-[80vw] overflow-hidden'>
                                     <div className="p-4 rounded border-2 flex items-center justify-end gap-3">
