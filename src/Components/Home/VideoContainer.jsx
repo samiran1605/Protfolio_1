@@ -86,13 +86,16 @@ function VideoContainer() {
     return (
         <>
             <div ref={containerRef} className="relative justify-between p-8 w-10/12 mt-20">
-                <div className="flex flex-col h-full w-full items-start justify-evenly p-16 ">
+                <div className="absolute top-[38.5%] -left-32 -z-10 opacity-20">
+                    <img src="src\assets\Double arrow.svg" alt="arrow" width={200} height={200}/>
+                </div>
+                <div className="flex flex-col h-auto w-full items-start justify-evenly p-16 ">
                     {paraData.map((para, index) => (
                         <div
                             key={index}
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={handleMouseLeave}
-                            className="m-8 text-2xl cursor-pointer hover:opacity-40 transition-opacity ease-in duration-300">
+                            className="m-8 text-4xl cursor-pointer uppercase opacity-30 hover:opacity-100 transition-opacity ease-in duration-300 z-10 mix-blend-difference">
                             <p>{para.content}</p>
                         </div>
                     ))}

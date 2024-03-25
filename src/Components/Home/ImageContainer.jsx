@@ -76,14 +76,17 @@ function ImageContainer({ }) {
 
   return (
     <>
-      <div ref={containerRef} className=" relative flex flex-row justify-between p-8 w-10/12 h-[100vh]">
-        <div className="flex flex-col h-auto items-start justify-evenly border-dashed p-4 ">
+      <div ref={containerRef} className="relative flex flex-row justify-between p-8 w-10/12 h-[100vh]">
+        <div className="absolute top-[38.5%] -left-32 -z-10 opacity-20">
+          <img src="src\assets\Double arrow.svg" alt="arrow" width={200} height={200}/>
+        </div>
+        <div className="flex flex-col h-auto items-start justify-evenly p-16 ">
           {paraData.map((para, index) => (
             <div
               key={index}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
-              className="m-4 text-4xl cursor-pointer ">
+              className="m-4 text-4xl cursor-pointer opacity-40 hover:opacity-100 transition-opacity ease-in duration-300 z-10 mix-blend-difference uppercase">
               <p>{para.content}</p>
             </div>
           ))}
@@ -94,8 +97,8 @@ function ImageContainer({ }) {
 
             <img className="absolute rounded w-4/5 z-20"
               src={imageData[hoveredIndex].imageUrl} alt='dev image' style={{
-                top: `${Math.random() * 35}%`, // Random value for top
-                left: `${Math.random() * 35}%`, // Random value for left
+                top: `${Math.random() * 30}%`, // Random value for top
+                left: `${Math.random() * 30}%`, // Random value for left
               }} />
 
           )}

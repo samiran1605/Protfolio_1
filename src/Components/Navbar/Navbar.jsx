@@ -6,8 +6,6 @@ import { Slant as Hamburger } from 'hamburger-react'
 
 const navData = [
     { title: "{ Home }", path: '/' },
-    { title: "{ Service }", path: '/service' },
-    { title: "{ Projects }", path: '/project' },
     { title: "{ Contact }", path: '/contact' },
 ]
 
@@ -38,35 +36,21 @@ function Navbar() {
     const menuVars = {
         initial: {
             scaleY: 0,
-            scaleX: 0,
-            opacity: 0,
-
-            borderLeftRadius: "50%",
-            borderBottomLeftRadius: "50%",
         },
         animate: {
-            scaleY: [0, 1],
-            scaleX: [0, 1],
-            opacity: 1,
-
-            borderLeftRadius: ["100%", "100%", "100%", "1%"],
-            borderBottomLeftRadius: ["100%", "100%", "100%", "1%"],
+            scaleY: 1,
             transition: {
                 duration: 0.5,
                 ease: [0.12, 0, 0.39, 0],
-                staggerChildren: 0.09,
+                staggerChildren: 0.39,
             },
         },
         exit: {
             scaleY: 0,
-            scaleX: 0,
-            opacity:0,
-            borderLeftRadius: "50%",
-            borderBottomLeftRadius: "50%",
             transition: {
-                delay: 0.3,
-                duration: 0.9,
-                ease: [0.22, 1, 0.40, 1],
+                delay: 0.39,
+                duration: 0.5,
+                ease: [0.33, 1, 0.40, 1],
             },
         }
 
@@ -75,13 +59,15 @@ function Navbar() {
     const containerVars = {
         initial: {
             transition: {
-
                 staggerChildren: 0.09,
+                staggerDirection:-1,
             }
         },
         open: {
             transition: {
+                delayChildren: 0.3,
                 staggerChildren: 0.09,
+                staggerDirection:1,
             }
         }
     };
@@ -104,12 +90,12 @@ function Navbar() {
                 {open && (
                     <>
                         <motion.div
-                            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60"
+                            className="fixed top-0 left-0 w-full h-full bg-[#101010] bg-opacity-60"
                             onClick={toggleNavbar}
                         />
-                        <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className={`w-[100vw] h-[100vh] origin-[94%_5%] overflow-hidden z-20 ${open ? "bg-[#C9ADA7]" : ""}`} style={{ borderRadius: "1%" }}>
+                        <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className={`w-[100vw] h-[100vh] origin-top overflow-hidden z-20 ${open ? "bg-[#C9ADA7]" : ""}`}>
 
-                            <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className='bg-[#101010] w-[100vw] h-[100vh] origin-top-right flex items-center overflow-hidden justify-center text-center border-2 border-[#C9ADA7]' style={{ borderRadius: "1%" }}>
+                            <motion.div variants={menuVars} initial="initial" animate="animate" exit="exit" className='bg-[#101010] w-[100vw] h-[100vh] origin-top flex items-center overflow-hidden justify-center text-center'>
 
                                 <div
                                     variants={containerVars}
@@ -138,7 +124,7 @@ const navLink = {
     initial: {
         y: "200vh",
         transition: {
-            duration: 1,
+            duration: 0.7,
             ease: [0.37, 0, 0.63, 1],
             staggerDirection: 1,
         },

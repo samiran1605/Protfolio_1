@@ -32,7 +32,7 @@ function TitleIntro({ getOffsetTop }) {
 
     return (
         <>
-            <div className="w-full h-full border-2">
+            <div className="w-full h-full">
                 <div style={{}} className='gap-4 h-[300vh]'>
                     <div className="sticky top-0 h-[100vh] overflow-hidden">
                         <div ref={scrollRef} className="absolute top-0 h-[100%] w-[300vw] will-change-transform flex justify-between items-center px-[10vw]">

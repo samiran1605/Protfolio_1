@@ -4,7 +4,7 @@ import TitleIntro from './TitleIntro'
 import Button from '../Button/Button'
 import { TypeAnimation } from 'react-type-animation';
 import VideoContainer from './VideoContainer';
-import {motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 
 
@@ -39,21 +39,31 @@ function Home() {
   useLayoutEffect(() => {
     scrollRef && setScrollRange(scrollRef.current.scrollHeight)
   }, [scrollRef])
+  
+  useEffect(() => {
+    
+    function calculateScrollRange() {
+      scrollRange = scrollRef.scrollHeight;
+    }
 
-  const { scrollYProgress } = useScroll()
+    function handleScroll() {
+      const scrollYProgress = (window.scrollY) / (scrollRange - window.innerHeight);
+      const transform = (scrollYProgress) * (-scrollRange);
+      scrollRef.current.style.transform = `translateY(${transform}px)`;
+    }
 
-  const transform = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, -scrollRange]
-  )
-  const physics = { damping: 15, mass: 0.57, stiffness: 55 }
-  const spring = useSpring(transform, physics)
+    document.addEventListener('scrollY', handleScroll);
+    window.addEventListener('resize', calculateScrollRange);
+
+  },[scrollRef])
+
+
+
 
   return (
-    <motion.div ref={scrollRef} style={{ scrollYProgress: spring }} className="scroll-smooth">
+    <div ref={scrollRef} className="">
 
-      <h1 className='gap-3 text-[#C9ADA7] p-8'>
+      <h1 className='gap-3 text-[#C9ADA7] px-8'>
         {showAnimation && (
           <TypeAnimation
             sequence={animationSequence}
@@ -65,8 +75,6 @@ function Home() {
               position: 'relative',
               top: '0',
               left: '20px',
-
-              marginBottom: '10vh',
               opacity: '0.3', // Adjust the opacity as needed
               pointerEvents: 'none',
             }}
@@ -82,18 +90,18 @@ function Home() {
         </div>
 
         <div className="border-2 mb-2 mx-8 mt-[10vh]">
-          <h1 className='text-9xl text-[#4A4E69] w-max p-8'>Work</h1>
+          <h1 className='text-9xl text-[#9A8C98] w-max p-8'>Work</h1>
         </div>
 
-        <div className="border-2 mx-8">
-          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Graphics Design</h1>
+        <div className="border-2 mx-8 mt-16">
+          <h1 className='text-4xl text-[#9A8C98] w-max p-8'>Graphics Design</h1>
         </div>
         <div className="flex flex-col justify-center items-center">
           <ImageContainer />
         </div>
 
         <div className="border-2 mx-8">
-          <h1 className='text-4xl text-[#4A4E69] w-max p-8'>Video Editing</h1>
+          <h1 className='text-4xl text-[#9A8C98] w-max p-8'>Video Editing</h1>
         </div>
         <div className="flex flex-col justify-center items-center">
           <VideoContainer />
@@ -104,7 +112,7 @@ function Home() {
         </div>
 
       </div>
-    </motion.div >
+    </div >
   )
 }
 
