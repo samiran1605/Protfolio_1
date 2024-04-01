@@ -27,9 +27,9 @@ const Contact = () => {
     if (isLoading) {
       return;
     }
-    const serviceId = 'service_yl4crdj';
-    const templateId = 'template_c4mlhrp';
-    const publicKey = 'TbdHUAf1vOsNXChDf';
+    const serviceId = process.env.EMAILJS_SERVICEID;
+    const templateId = process.env.EMAILJS_TEMPLATE;
+    const publicKey = process.env.EMAILJS_PUBLICKEY;
 
     const templateParams = {
 
