@@ -1,0 +1,10 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #C9ADA7 inset !important;
+    -webkit-text-fill-color: #15161E !important; 
+    -webkit-tap-highlight-color: #232023 !important;
+    background-color: #15161E !important;
+    color: #C9ADA7; /* Change the text color here */
+}

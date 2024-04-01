@@ -11,10 +11,9 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 function Home() {
 
   const [offsetTop, setOffsetTop] = useState(0)
-  const [scrollRange, setScrollRange] = useState(0)
+  let [scrollRange, setScrollRange] = useState(0)
   const offsetRef = useRef(null)
   const scrollRef = useRef(null)
-
 
 
   useEffect(() => {
@@ -108,7 +107,7 @@ function Home() {
         </div>
 
         <div className="text-center mb-8">
-          <Button linkto="contact" />
+          
         </div>
 
       </div>

@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import Footer from './Components/Footer/Footer'
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <div ref={cursorOutline} className="fixed bg-[#9A8C98] border-[#F2E9E4] top-0 left-0 w-20 h-20 border-2 rounded-lg z-10 pointer-events-none" style={{ transform: "translate(-50%, -50%)" }}></div>
       <Navbar />
       <Outlet />
+      <Footer/>
     </>
   )
 }
