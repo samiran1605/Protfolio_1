@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import './style.css'
 
+
 const Contact = () => {
 
   const [isLoading, setIsLoading] = useState(false);
@@ -27,9 +28,9 @@ const Contact = () => {
     if (isLoading) {
       return;
     }
-    const serviceId = process.env.EMAILJS_SERVICEID;
-    const templateId = process.env.EMAILJS_TEMPLATE;
-    const publicKey = process.env.EMAILJS_PUBLICKEY;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICEID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATEID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLICKEY;
 
     const templateParams = {
 
